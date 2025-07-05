@@ -1,0 +1,365 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Modern Excel-like styling with Figma-inspired theme */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); /* Softer, modern background */
+  color: #1e293b;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Container for the table */
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  margin: 16px;
+  padding: 16px;
+}
+
+/* Excel-like table styling */
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  background: #ffffff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid #e2e8f0;
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+th {
+  background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%); /* Vibrant blue header */
+  color: #ffffff;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  user-select: none;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  transition: background 0.2s ease;
+}
+
+th:hover {
+  background: linear-gradient(180deg, #60a5fa 0%, #3b82f6 100%);
+  cursor: pointer;
+}
+
+/* Resizable columns */
+th {
+  position: relative;
+}
+
+.resize-handle {
+  position: absolute;
+  right: -3px;
+  top: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 20;
+}
+
+.resize-handle:hover {
+  background: #93c5fd;
+}
+
+/* Cell styling */
+td {
+  background: #ffffff;
+  transition: background 0.2s ease;
+}
+
+tr:hover td {
+  background: #f1f5f9; /* Subtle hover effect */
+}
+
+/* Selected and editing cell */
+.cell-selected {
+  border: 2px solid #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.1);
+  box-shadow: inset 0 0 0 1px #3b82f6;
+}
+
+.cell-editing {
+  border: 2px solid #3b82f6 !important;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px #3b82f6, 0 4px 12px rgba(59, 130, 246, 0.2);
+  z-index: 100;
+}
+
+/* Input styling */
+input[type="text"], input[type="number"] {
+  font-family: inherit;
+  font-size: 13px;
+  border: none;
+  background: transparent;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Dropdown styling */
+.dropdown-container {
+  position: relative;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10000;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-height: 240px;
+  overflow-y: auto;
+  animation: slideDown 0.2s ease-out;
+}
+
+.dropdown-item {
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 13px;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #eff6ff;
+  color: #1e40af;
+}
+
+.dropdown-item:last-child {
+  border-bottom: none;
+}
+
+/* Animation for dropdown */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slider for rating cells */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  background: #e2e8f0;
+  border-radius: 4px;
+  outline: none;
+  width: 100%;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background: #3b82f6;
+  border: 1px solid #2563eb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.slider::-webkit-slider-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+}
+
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: #3b82f6;
+  border: 1px solid #2563eb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.slider::-moz-range-thumb:hover {
+  background: #2563eb;
+  transform: scale(1.1);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* Toolbar styling */
+.excel-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+  padding: 12px 16px;
+  border-bottom: 1px solid #d1d5db;
+  border-radius: 8px 8px 0 0;
+}
+
+.excel-button {
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.excel-button:hover {
+  background: #eff6ff;
+  border-color: #3b82f6;
+}
+
+.excel-button:active {
+  background: #dbeafe;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Formula bar */
+.excel-formula-bar {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 13px;
+  padding: 8px 12px;
+  margin: 8px 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Calendar popup */
+.calendar-popup {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 16px;
+  min-width: 300px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  z-index: 10000;
+}
+
+/* Accessibility enhancements */
+:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+[role="button"], .excel-button, .dropdown-item {
+  cursor: pointer;
+}
+
+[role="button"]:focus-visible, .excel-button:focus-visible, .dropdown-item:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Glassmorphism for overlays */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+}
+
+/* Number formatting */
+.excel-number {
+  text-align: right;
+  font-family: 'Consolas', 'Monaco', monospace;
+}
+
+/* Positive/negative colors */
+.excel-positive {
+  color: #15803d;
+}
+
+.excel-negative {
+  color: #b91c1c;
+}
+
+/* Freeze pane indicator */
+.freeze-pane {
+  border-right: 2px solid #3b82f6;
+  box-shadow: 2px 0 6px rgba(59, 130, 246, 0.2);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .table-container {
+    margin: 8px;
+    padding: 8px;
+  }
+
+  th, td {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+
+  .excel-button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
